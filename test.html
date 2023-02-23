@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        td {
+            font-size: 10pt;
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        //전역변수 
+        var num = 1;
+        var timer = 0;
+        var totalCount = 0;
+        var youCount = 0;
+        var comCount = 0;
+        var samCount = 0;
+        var flag = false;
+        var com = 0;
+        function myrotateImage() {
+            document.me.src = "./images/" + num + ".gif";
+            num++;
+            if (num == 4) { num = 1; }
+
+            document.computer.src = "./images/" + num + ".gif";
+            timer = window.setTimeout("myrotateImage()", 100);
+            flag = true;
+        }//end
+
+        function setting(num) {
+            if (flag == true) {
+                clearTimeout(timer);
+                flag = false;
+                // document.computer.src = "./images/" + num + ".gif";
+                com = Math.floor(Math.random() * 3 + 1);
+            }
+        }//end
+        if (me === 'scissors') {
+            if (computer === 'scissors') { document.write('Draw'); msg = '무승부'; }
+            else if (computer === 'rock') { document.write('Defeat'); msg = '패배'; }
+            else if (computer === "paper") { document.write('Win'); msg = '승리'; }
+        }
+        if (me === 'rock') {
+            if (computer === 'scissors ') { document.write('Win'); msg = '무승부'; }
+            else if (computer === 'rock') { document.write('Draw'); msg = '패배'; }
+            else if (computer === 'paper') { document.write('Defeat'); msg = '승리'; }
+        }
+        if (me === 'paper') {
+            if (computer === 'scissors') { document.write('Defeat'); msg = '무승부'; }
+            else if (computer === 'rock') { document.write('Win'); msg = '패배'; }
+            else if (computer === 'paper') { document.write('Draw'); msg = '승리'; }
+        }
+        result = '결과: ${msg}:Total ${score} 점';
+        document.getElementById('display').innerHTML = result;
+
+    </script>
+</head>
+
+<body>
+    <h2 align="center"> 가위, 바위, 보</h2>
+    <table border="0" width="300" align="center">
+        <tr>
+            <td colspan="2"> <img src="./images/1.gif" width="90" height="90" border="0" alt="" name="scissors">
+            </td>
+            <td colspan="2"> <img src="./images/2.gif" width="90" height="90" border="0" alt="" name="rock">
+            </td>
+            <td colspan="2"> <img src="./images/3.gif" width="90" height="90" border="0" alt="" name="paper">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">가위</td>
+            <td colspan="2">바위</td>
+            <td colspan="2">보</td>
+        </tr>
+        <tr>
+            <td colspan="6"><br><br></td>
+        </tr>
+        <tr>
+            <td colspan="3"><img src="images/1.gif" width="90" height="90" border="0" alt="" name="me"></td>
+            <td colspan="3"><img src="images/1.gif" width="90" height="90" border="0" alt="" name="computer"></td>
+        </tr>
+        <tr>
+            <td colspan="3">You</td>
+            <td colspan="3">Computer</td>
+        </tr>
+        <tr>
+            <td colspan="6"><br><br></td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <input type="text" name="txtTotal" size="2"> 전
+                <input type="text" name="txtYou" size="2"> 승
+                <input type="text" name="txtSam" size="2"> 무
+                <input type="text" name="txtCom" size="2"> 패
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <br><br>
+                <input type="button" value="게임 시작" onclick="myrotateImage()">
+                <input type="button" value="게임 종료" onclick="setting()">
+            </td>
+        </tr>
+    </table>
+    <div id="display"></div>
+</body>
+
+</html>
